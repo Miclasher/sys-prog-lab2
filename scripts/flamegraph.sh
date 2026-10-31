@@ -17,8 +17,3 @@ sudo perf script -i results/$NAME.perf.data > results/$NAME.perf
 ./FlameGraph/stackcollapse-perf.pl results/$NAME.perf > results/$NAME.folded
 # 4) малювання SVG
 ./FlameGraph/flamegraph.pl --title "$NAME N=$N" results/$NAME.folded > results/$NAME.svg
-
-echo "Готово: results/$NAME.svg (відкрийте у браузері)"
-
-# Для всієї системи (опційно):
-# sudo perf record -F 99 -a -g -- sleep 10   (поки в іншому терміналі працює програма)
