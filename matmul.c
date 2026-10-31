@@ -13,7 +13,6 @@ static void init_matrix(double *m, int n, unsigned seed) {
         m[i] = (double)rand() / RAND_MAX;
 }
 
-// Наївний варіант: внутрішній цикл йде по стовпцю B (крок n) -> погана локальність
 __attribute__((noinline))
 static void matmul_ijk(const double *A, const double *B, double *C, int n) {
     for (int i = 0; i < n; i++)
@@ -25,8 +24,6 @@ static void matmul_ijk(const double *A, const double *B, double *C, int n) {
         }
 }
 
-// Переставлені цикли: внутрішній цикл послідовно йде по рядках B і C
-// -> гарна локальність і компілятор може векторизувати (SIMD / AVX)
 __attribute__((noinline))
 static void matmul_ikj(const double *restrict A, const double *restrict B,
                        double *restrict C, int n) {
