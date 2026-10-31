@@ -14,5 +14,4 @@ perf stat -d "$BIN" "$N" "$VAR" 2>&1 | tee results/$NAME.stat.txt
 echo "=== 2.3 perf record + perf report ==="
 perf record -g -o results/$NAME.rec.data -- "$BIN" "$N" "$VAR"
 perf report -i results/$NAME.rec.data --stdio --sort symbol | head -40 | tee results/$NAME.report.txt
-echo "Інтерактивно: perf report -i results/$NAME.rec.data"
-echo "Анотація асемблера гарячої функції: perf annotate -i results/$NAME.rec.data matmul_ijk"
+echo "Anotate: perf annotate -i results/$NAME.rec.data matmul_$VAR"
